@@ -32,7 +32,7 @@ public class Productor extends Thread{
 			Main.Buffer[prod_position] = rm.nextInt(6)+1;;
 			System.out.print("\n" + "Producer PUT: " + Main.Buffer[prod_position]+ " in position " + prod_position);
 					try{
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 					}catch(InterruptedException e){
 						e.printStackTrace();
 					}

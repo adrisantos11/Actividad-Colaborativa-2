@@ -9,8 +9,15 @@ public class Main {
 	static int[] Buffer = new int[5];
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		Productor p1 =new Productor("Juan");
+		Consumidor c1 = new Consumidor("Pablo");
 		
+		p1.start();
+		c1.start();
+		
+		p1.join();
+		c1.join();
 	}
 
 }
