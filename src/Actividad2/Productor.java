@@ -19,32 +19,31 @@ public class Productor extends Thread{
 		{
 			try{
 				Main.producer_sem.acquire();
-			}catch(InterruptedException e){
-				e.printStackTrace();
-			}
-			try{
 				Main.mutex.acquire();
+
+				// REGION CRÍTICA
+				Main.Buffer[prod_position] = rm.nextInt(6)+1;;
+				System.out.println("El productor inicializa un: " + Main.Buffer[prod_position]+ " en la posición " + prod_position);
+				try 
+				{
+					Thread.sleep(500);
+				} catch(InterruptedException e){
+					e.printStackTrace();
+				}
+				if(prod_position > Main.tamaño_Buffer)
+					prod_position = 0;
+				else {
+					prod_position = (prod_position + 1) % (Main.tamaño_Buffer);
+					itemCount--;
+				}
+				/* FIN REGIÓN CRÏTICA */
+				Main.mutex.release();
+				Main.consumer_sem.release();
+
 			}catch(InterruptedException e){
 				e.printStackTrace();
 			}
-
-			// REGION CRÏTICA
-			Main.Buffer[prod_position] = rm.nextInt(6)+1;;
-			System.out.print("\n" + "Producer PUT: " + Main.Buffer[prod_position]+ " in position " + prod_position);
-					try{
-						Thread.sleep(1000);
-					}catch(InterruptedException e){
-						e.printStackTrace();
-					}
-			prod_position = (prod_position + 1) % (Main.Buffer.length);
-			itemCount--;
-
-	 /* FIN REGIÓN CRÏTICA */
-			Main.mutex.release();
-			Main.consumer_sem.release();
-
 
 		}
-
 	}
 }
