@@ -2,12 +2,23 @@ package Actividad1;
 
 import java.util.concurrent.Semaphore;
 
+/**
+ * Clase contador de exclusión mutua
+ * @author Jorge Da Silva
+ * @author José Aceituno
+ * @author Adrián Santos
+ */
 public class Contador {
 
 
+	//---- VARIABLES ----
 	static final  int NITER=1000000;
 	static volatile int count = 0;
 
+	/**
+	 * Método main del programa
+	 * @param args
+	 */
 	public static void main(String[] args) 
 	{
 		try 
@@ -17,8 +28,10 @@ public class Contador {
 			Tarea hl= new Tarea("h1",s);
 			Tarea h2= new Tarea("h2",s);
 			
+			//Empezamos los hilos
 			hl.start();
 			h2.start();
+			//Juntamos los hilos
 			hl.join();
 			h2.join();
 			
