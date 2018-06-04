@@ -2,8 +2,15 @@ package Actividad3;
 
 import java.util.concurrent.Semaphore;
 
+/**
+ * Clase Principal, que se encarga de ejecutar el programa
+ * @author José Aceituno, Jorge Da Silva y Adrián Santos
+ *
+ */
 public class Principal 
 {
+	
+	//---------ATRIBUTOS-----------
 	
 	public volatile static int contadorSubida = 0;
 	public volatile static int contadorBajada = 0;
@@ -12,6 +19,9 @@ public class Principal
 	public static Semaphore exmut_s;
 	public static Semaphore exmut_b;
 	
+	
+	
+	//---------MAIN-----------
 	
 	public static void main(String[] args)
 	{
